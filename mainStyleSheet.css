@@ -1,0 +1,82 @@
+h1 {
+
+    color: white;
+    font-size: 50px;
+    font-style: italic;
+    background-color: blue;
+    margin: 0;
+    display: inline-block;
+    border:5px groove #004093;
+    float:left;
+
+}
+#homePageButton {
+    float: left;
+    margin: .5%;
+    background-color: #004093;
+    border: 2px;
+    height:50px;
+    width:50px;
+
+}
+#spreadSheetButton {
+    float: left;
+    margin: .5%;
+    background-color: #004093;
+    border: 2px;
+    height: 50px;
+    width: 50px;
+}
+#ourStatsButton {
+    float: left;
+    margin: .5%;
+    background-color: #004093;
+    border: 2px;
+    height: 50px;
+    width: 50px;
+}
+#headerButton {
+    float: left;
+    margin: .5%;
+    background-color: #004093;
+    border: 2px;
+    height: 50px;
+    width: 50px;
+}
+#subPageTitle {
+    float: left;
+    margin: .5%;
+    font-size: 50px;
+    color: white;
+    background-color: #0772f4;
+}
+#addTeamButton {
+    margin: .5%;
+    float: right;
+    height: 50px;
+    width: 50px;
+    font-size: 40px;
+    font-style: oblique;
+    background-color: #0772f4;
+    border: 0px;
+    color:white;
+}
+body {
+    background-color: #0772f4;
+}
+#homeBar {
+    width: 100%;
+    margin:0px;
+    border: 20px;
+    border-color: #0772f4;
+    height: 69px;
+    background-color: #0772f4;
+}
+#teamSpreadSheet{
+
+    width:100%;
+    height:5%;
+    
+    
+
+}
