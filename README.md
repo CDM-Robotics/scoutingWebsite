@@ -1,2 +1,2 @@
 # scoutingWebsite
-This is the repo for the scouting website
+This is the second repo for the scouting website (bc the other one failed miserably...)
