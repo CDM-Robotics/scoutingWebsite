@@ -4,7 +4,7 @@
 
 <head>
 
-    <link rel="stylesheet" ; type="text/css" href="mainStyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="mainStyleSheet.css">
     <link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css">
     <!--<link rel="stylesheet" type="text/css" href="jquery/jquery-plugins/jquery.layout.css"> -->
     <script src="jquery/jquery-2.1.0.js"></script>
@@ -33,7 +33,7 @@
                 <div id="teamStatisticsHeader">
 
                     <h2 id="subPageTitle">Team Statistics</h2>
-                    <button id="addTeamButton" onclick="addTeam()">+</button>
+                    <button id="addTeamButton" onclick="addTeam()" >+</button>
 
                 </div>
 
@@ -61,6 +61,8 @@
 </body>
 </html>
 
+<script type="text/javascript" src="transferingInfo.js"></script>
+
 <script>
 
     function addTeam() {
@@ -76,7 +78,7 @@
         var data5 = newRow.insertCell(6);
         var data6 = newRow.insertCell(7);
 
-        
+        window.open("file:///C:/Users/cleeh/Desktop/MyScoutingWebsite/addTeam.html");
 
 
 
