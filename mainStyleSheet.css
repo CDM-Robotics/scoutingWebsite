@@ -3,10 +3,12 @@ h1 {
     color: white;
     font-size: 50px;
     font-style: italic;
+    font-family: sans-serif;
     background-color: blue;
     margin: 0;
     display: inline-block;
-    border:5px groove #004093;
+    border:5px #004093;
+    border-style: ridge;
     float:left;
 
 }
@@ -15,9 +17,8 @@ h1 {
     margin: .5%;
     background-color: #004093;
     border: 2px;
-    height:50px;
+    height: 50px;
     width: 100px;
-    radius: 5px;
 
 }
 #spreadSheetButton {
@@ -59,18 +60,18 @@ h1 {
     font-size: 40px;
     font-style: oblique;
     background-color: #0772f4;
-    border: 0px;
+    border: 2px #004093;
     color:white;
 }
 body {
-    background-color: #0772f4;
+    background-color: #707B7C;
 }
 #homeBar {
     width: 100%;
     margin:0px;
     border: 20px;
     border-color: #0772f4;
-    height: 69px;
+    height: 68px;
     background-color: #0772f4;
 }
 #teamSpreadSheet {
