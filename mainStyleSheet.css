@@ -3,48 +3,22 @@ h1 {
     color: white;
     font-size: 50px;
     font-style: italic;
-    font-family: sans-serif;
     background-color: blue;
     margin: 0;
     display: inline-block;
-<<<<<<< HEAD
     border:5px groove white;
-=======
-    border:5px #004093;
-    border-style: ridge;
->>>>>>> 4cc29ebe8016433e7cf95cdea93a67e676882238
     float:left;
 
 }
-#homePageButton {
-    float: left;
-    margin: .5%;
-    background-color: #004093;
-    border: 2px;
-<<<<<<< HEAD
-    height:50px;
-    width:50px;
-=======
-    height: 50px;
-    width: 100px;
->>>>>>> 4cc29ebe8016433e7cf95cdea93a67e676882238
 
-}
-#spreadSheetButton {
+.headerButtons {
     float: left;
     margin: .5%;
     background-color: #004093;
     border: 2px;
     height: 50px;
-    width: 50px;
-}
-#ourStatsButton {
-    float: left;
-    margin: .5%;
-    background-color: #004093;
-    border: 2px;
-    height: 50px;
-    width: 50px;
+    width: 90px;
+    color:white;
 }
 #headerButton {
     float: left;
@@ -69,18 +43,18 @@ h1 {
     font-size: 40px;
     font-style: oblique;
     background-color: #0772f4;
-    border: 2px #004093;
+    border: 0px;
     color:white;
 }
 body {
-    background-color: #707B7C;
+    background-color: #0772f4;
 }
 #homeBar {
     width: 100%;
     margin:0px;
     border: 20px;
     border-color: #0772f4;
-    height: 68px;
+    height: 69px;
     background-color: #0772f4;
 }
 #teamSpreadSheet {
