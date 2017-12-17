@@ -16,7 +16,8 @@ h1 {
     background-color: #004093;
     border: 2px;
     height:50px;
-    width:50px;
+    width: 100px;
+    radius: 5px;
 
 }
 #spreadSheetButton {
@@ -25,7 +26,7 @@ h1 {
     background-color: #004093;
     border: 2px;
     height: 50px;
-    width: 50px;
+    width: 90px;
 }
 #ourStatsButton {
     float: left;
@@ -33,7 +34,7 @@ h1 {
     background-color: #004093;
     border: 2px;
     height: 50px;
-    width: 50px;
+    width: 90px;
 }
 #headerButton {
     float: left;
