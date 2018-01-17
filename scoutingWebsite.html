@@ -1,0 +1,250 @@
+﻿<!----------------------------------------------
+ *Author: Austin Leehealey
+ *Date:12/7/2018
+ *Description: The html code for the visual website interface
+ *Ongoing Problems:Comparative graphs
+                  :The webpage is infinitely extendable. fix pls
+                  :Change the labels for the Spreadsheet data inputs
+------------------------------------------------>
+
+<title>Triton Tech Scouting Squad</title>
+
+<html>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="script.js" href="/script.js"></script>
+    <!--<link id="data" rel="alternate" type="text/plain" href="/data.txt" />
+    <link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="jquery/jquery-plugins/jquery.layout.css">
+    <script src="jquery/jquery-2.1.0.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+    <script src="jquery-plugins/jquery.layout.js"></script>
+    <script src="jquery-plugins/jquery.highlight.js"></script>
+    <script src="jquery-plugins/jquery.ba-resize.min.js"></script>
+    <script src="jquery-plugins/jquery.scrollTo.min.js"></script>
+    <script src="jquery-plugins/jquery.ui-contextmenu.js"></script>-->
+
+</head>
+
+<body>
+    <div id="homeBar">
+
+        <h1 id="h1">Triton Tech Scouting Squad</h1>
+
+        <button class="headerButtons" id="spreadSheetButton" onclick="appearFunction(id); receiveData();" title="teamsPage">Team Spreadsheet</button>
+        <button class="headerButtons" id="comparativeGraphs" title="comparePage">Comparative Graphs</button>
+        <button class="headerButtons" id="teamSearch" onclick="appearFunction(id);" title="searchPage">Team Search</button>
+        <button class="headerButtons" id="legendButton" onclick="appearFunction(id)" title="legendPage">Data Legend</button> 
+
+    </div>
+    <div id="legendPage">
+        <div class="subPageTitle" id="DsubTitle">Data Type Legend</div>
+        <br />
+        <br />
+        <table id="DlegendTable">
+            <tr>
+                <td>Year</td>
+                <td>Data 1:</td>
+                <td>Data 2:</td>
+                <td>Data 3:</td>
+                <td>Data 4:</td>
+                <td>Data 5:</td>
+                <td>Data 6:</td>
+                <td>Data 7:</td>
+                <td>Data 8:</td>
+
+            </tr>
+            <tr>
+                <td>2018</td>
+                <td>Team Cooperation</td>
+                <td>Robot Description</td>
+                <td>Robot Functionality</td>
+                <td>Robot Speed</td>
+                <td>Number of Boxes placed</td>
+                <td>Points Scored</td>
+                <td>Comments regarding Compatability</td>
+                <td>Other notable Comments</td>
+
+            </tr>
+        </table>
+    </div>
+    <div id="searchPage" title="off">
+        <div id="searchPageHeader">
+
+            <h2 class="subPageTitle">Team Search</h2>
+            <form id="searchBar">
+
+                <input placeholder="Search For Teams" id="userSearch" name="userSearch" type="text" onkeyup="receiveData2(this.value)" />
+
+            </form>
+        </div>
+        <br />
+        <div id="searchError"></div>
+        <div id="teamButtons">
+            <table>
+                <tr>
+
+                    <td>   </td>
+
+                    <td>
+                        <form class="checkBoxBar">
+
+                            <label class="label" for="teamNameCheckBox">Search by Names</label>
+                            <input title="off" id="teamNameCheckBox" class="checkbox" type="button" name="teamNameCheckBox" onclick="changeTitle(id)" />
+                        </form>
+
+                    </td>
+
+                    <td>  </td>
+
+                    <td>
+                        <form class="checkBoxBar">
+                            <label class="label" for="teamNumberCheckBox">Search by Numbers</label>
+                            <input title="off" id="teamNumberCheckBox" class="checkbox" type="button" name="teamNumberCheckBox" onclick="changeTitle(id)" />
+                        </form>
+                    </td>
+
+                    <td>   </td>
+
+                    <td>
+                        <form class="checkBoxBar">
+                            <label class="label" for="yearCheckBox">Search by Year</label>
+                            <input title="off" id="yearCheckBox" class="checkbox" type="button" name="teamNumberCheckBox" onclick="changeTitle(id)" />
+                        </form>
+                    </td>
+
+                    <td>   </td>
+
+                </tr>
+            </table>
+            <table id="teamButtonsTable"></table>
+
+            <div id="searchJson"></div>
+            <div id="userInput" title="on"></div>
+            <div id="teamJsonInfoPage" style=" display:none;"></div>
+
+
+        </div>
+    </div>
+    <div id="teamInfoPage">
+
+        <div class="subPageTitle" id="IsubTitle">
+            <p id="IteamNNY"></p>
+
+        </div>
+
+        <div id="Iimage" style="float:none; margin:10px;">
+
+        </div>
+        <div id="Idata1">
+
+        </div>
+        <div id="Idata2">
+
+        </div>
+        <div id="Idata3">
+
+        </div>
+        <div id="Idata4">
+
+        </div>
+        <div id="Idata5">
+
+        </div>
+        <div id="Idata6">
+
+        </div>
+        <div id="Idata7">
+
+        </div>
+        <div id="Idata8">
+
+        </div>
+
+    </div>
+    <div id="teamsPage" title="off">
+        <div id="teamStatisticsHeader">
+
+            <h2 class="subPageTitle">Team Statistics</h2>
+            <button id="addTeamButton" onclick="addTeam()">+</button>
+
+        </div>
+
+        <div id="teamSpreadSheet">
+            <div id="dataStr" title="on" style=" display:none;"></div>
+            <table id="teamTable" style=" width:100%; color:white; font-size:25px; ">
+                <tr>
+                    <td>Team Name</td>
+                    <td>Number</td>
+                    <td>Year</td>
+                    <td>Data 1</td>
+                    <td>Data 2</td>
+                    <td>Data 3</td>
+                    <td>Data 4</td>
+                    <td>Data 5</td>
+                    <td>Data 6</td>
+                    <td>Data 7</td>
+                    <td>Data 8</td>
+                </tr>
+
+            </table>
+            <form class="fieldsetI" id="addTeamFormImage" action="/submiimage" method="POST" enctype="multipart/form-data">
+                <br />
+                <label for="teamImage">Photo of the Robot</label>
+                <br />
+                <input id="teamImage" type="file" />
+
+                <input type="submit" value="Send Image" />
+
+            </form>
+            <form class="fieldsetI" id="addTeamForm" action="/submit" method="POST" >
+                <br />
+                    <p class="print">Note: Do NOT use these characters , & = " : or risk destroying my code</p>
+
+                    <label for="teamName">Team Name:</label>
+                    <input class="addTeamInputs" type="text" id="teamName" name="teamName" placeholder="Name" />
+                    <hr />
+                    <label for="teamNumber">Team Number:</label>
+                    <input class="addTeamInputs" type="number" id="teamNumber" name="teamNumber" placeholder="Number" />
+                    <hr />
+                    <label for="year">Year:</label>
+                    <input class="addTeamInputs" type="number" id="year" name="year" placeholder="Year" />
+                    <hr />
+                    <label for="data1">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data1" name="data1" />
+                    <hr />
+                    <label for="data2">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data2" name="data2" />
+                    <hr />
+                    <label for="data3">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data3" name="data3" />
+                    <hr />
+                    <label for="data4">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data4" name="data4" />
+                    <hr />
+                    <label for="data5">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data5" name="data5" />
+                    <hr />
+                    <label for="data6">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data6" name="data6" />
+                    <hr />
+                    <label for="data7">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data7" name="data7" />
+                    <hr />
+                    <label for="data8">Data:</label>
+                    <input class="addTeamInputs" type="text" id="data8" name="data8" />
+                    <hr />
+                    
+                    <input type="submit" value="Send" />
+            </form>
+
+            
+        </div>
+    </div>
+    
+</body>
+
+</html>
+
