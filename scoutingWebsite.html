@@ -28,15 +28,220 @@
 
 </head>
 
-<body>
+<body onload="receiveYears('yearSearchTable')">
+    <!--THis stuff is all part of the style of the page and shouldn't be messed with kid-->
+    <div style=" position: relative;background-color:darkblue; width:10%; height: 100%; float:left; margin:0px;">
+        <!--This is the div for the TT logo image-->
+        <div style="width:100%; height:10%; margin:0px;"></div>
+        <div id="yearSpecifics">
+            <center>
+                <p style="color:white; font-size:25px;">Select a Year</p>
+            </center>
+            <table style=" color:white; width:100%; margin:0px;" id="yearSearchTable"></table>
+            <center>
+                <button onclick="erasePage(); pageAppear(id); " name="addYearPage" id="addYear" style="position: absolute; width:100%; font-size:25px; border:0px; color:white; background-color:transparent; height: 5%; bottom: 0; right: 0;  left: 0; ">Add a Year</button>
+            </center>
+        </div>
+        <div style="display:none;" id="competitionSpecifics">
+
+        </div>
+    </div>
+
+    <div style=" background-color:lightblue; float:right; width:90%; height:10%; ">
+        <form id="searchBar">
+
+            <input placeholder="Search For Teams" id="userSearch" name="userSearch" type="text" onkeyup="receiveData2(this.value)" />
+
+        </form>
+        <button style=" background-color:lightblue;"id="addTeamButton" onclick="erasePage(); pageAppear(id); " name="addTeam">Add Team</button>
+    </div>
+    <!--THis stuff is all part of the style of the page and shouldn't be messed with kid ^^^-->
+
+
+
+    <div style=" width:90%; height:90%; float:right;">
+        <!-- This is the form that is activated when you press the add team button ----------------------------------------------------->
+        <div class="subPage" id="addYearPage" name="off" style="display:none;width:100%; height:100%; float:right;">
+
+            <form style="color:black;" class="fieldsetI" enctype="multipart/form-data" method="POST" action="/newYear">
+                <br />
+                <label>Year:</label>
+                <input class="addTeamInputs" type="number" placeholder="Year" name="year" />
+                <hr />
+                <label>Data Type 1:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 1" name="data1" />
+                <hr />
+                <label>Data Type 2:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 2" name="data2" />
+                <hr />
+                <label>Data Type 3:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 3" name="data3" />
+                <hr />
+                <label>Data Type 4:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 4" name="data4" />
+                <hr />
+                <label>Data Type 5:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 5" name="data5" />
+                <hr />
+                <label>Data Type 6:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 6" name="data6" />
+                <hr />
+                <label>Data Type 7:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 7" name="data7" />
+                <hr />
+
+                <input type="submit" value="Submit" />
+
+            </form>
+        </div>
+
+        <div class="subPage" id="addTeam" name="off" style=" display:none;width:100%; height:100%; float:right;">
+
+
+            <form class="fieldsetI" id="addTeamForm" action="/submit" method="POST" enctype="multipart/form-data">
+                <br />
+
+                <label for="teamImage">Photo of the Robot:</label>
+
+                <input id="teamImage" name="teamImage" type="file" />
+                <hr />
+                <label for="teamName">Team Name:</label>
+
+                <input class="addTeamInputs" type="text" id="teamName" name="teamName" placeholder="Name" />
+                <hr />
+                <label for="teamNumber">Team Number:</label>
+                <input class="addTeamInputs" type="text" id="teamNumber" name="teamNumber" placeholder="Number" />
+                <hr />
+                <label for="year">Year:</label>
+                <input class="addTeamInputs" type="number" id="year" name="year" placeholder="Year" />
+                <hr />
+                <label for="competition">Competition:</label>
+                <input class="addTeamInputs" type="text" id="competition" name="competition" placeholder="Please do not misspell!!!" />
+                <hr />
+                <label for="data1">Scouter Name:</label>
+                <input class="addTeamInputs" type="text" id="data1" name="data1" />
+                <hr />
+                <label for="data2">Team Cooperation:</label>
+                <input class="addTeamInputs" type="text" id="data2" name="data2" value="A - F" />
+                <hr />
+                <label for="data3">Drive - Detailed Description:</label>
+                <input class="addTeamInputs" type="text" id="data3" name="data3" value="Wheel type, Drive train specifics, etc" />
+                <hr />
+                <label for="data4">Climbing Mechanism - Detailed Description:</label>
+                <input class="addTeamInputs" type="text" id="data4" name="data4" />
+                <hr />
+                <label for="data5">Cube inputs:</label>
+                <input class="addTeamInputs" type="text" id="data5" name="data5" value="How well the robot handles cubes on the ground" />
+                <hr />
+                <label for="data6">Cube outputs:</label>
+                <input class="addTeamInputs" type="text" id="data6" name="data6" value="How well the robot places cubes in the scale or switches" />
+                <hr />
+                <label for="data7">Number of Switch cubes placed:</label>
+                <input class="addTeamInputs" type="text" id="data7" name="data7" />
+                <hr />
+                <label for="data8">Number of Scale cubes placed:</label>
+                <input class="addTeamInputs" type="text" id="data8" name="data8" />
+                <hr />
+                <label for="data9">Number of cubes Exchanged:</label>
+                <input class="addTeamInputs" type="text" id="data9" name="data9" />
+                <hr />
+                <label for="data10">Scouter's opinion on the quality of the robot:</label>
+                <input class="addTeamInputs" type="text" id="data10" name="data10" />
+                <hr />
+
+                <label for="data11">Compatability with our robot:</label>
+                <input class="addTeamInputs" type="text" id="data11" name="data11" />
+                <hr />
+                <label for="data12">Robot overall grade:</label>
+                <input class="addTeamInputs" type="text" id="data12" name="data12" value="A-F" />
+                <hr />
+                <label for="data13">Comments:</label>
+                <input class="addTeamInputs" type="text" id="data13" name="data13" />
+                <hr />
+                <input type="submit" value="Send" />
+                <br />
+                <br />
+            </form>
+
+        </div>
+
+        <!-- This is the Starting page that introduces you the the stuff------------------------------------------------------------->
+        <div class="subPage" id="start">
+            <center>
+
+                <h2 style=" margin:0px; border:0px; background-color: white; color:darkblue; font-size:50px;">Welcome to the Triton Tech Scouting Squad!</h2>
+                <br />
+                <br />
+                <h2 style=" background-color: white; color: black; font-size:30px; border:0px;">Type in a year to get started analyzing!</h2>
+
+                <div>
+                    <button id="getStartedButton" name="bigSpreadSheet" onclick="erasePage(); pageAppear(id); receiveData(id)">Get Started</button>
+                    
+                </div>
+
+            </center>
+        </div>
+
+        <div id="spreadSheet" class="subPage" name="off" style=" display:none;">
+            <center>
+                <table border="1" id="spreadSheetTable" style=" color:black; font-size:15px;"></table>
+                <button id="addCompetition" name="addCompetitionPage" onclick="erasePage(); pageAppear(id);" style="border:1px solid black; width:25%;height:5%;background-color:transparent;">Add Competition</button>
+            </center>
+        </div>
+
+        <div id="addCompetitionPage" class="subPage" name="off" style=" display:none;">
+            <form class="fieldsetI" id="addTeamForm" action="/newCompetition" method="POST" enctype="multipart/form-data">
+
+                <label for="competitionName">Competition Name:</label>
+                <input class="addTeamInputs" type="text" id="competitionName" name="competitionName" />
+                <br />
+                <label for="year">Year:</label>
+                <input class="addTeamInputs" type="text" id="year" name="year" />
+                <br />
+                <input type="submit" value="Send" />
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
     <div id="homeBar">
 
         <h1 id="h1">Triton Tech Scouting Squad</h1>
 
-        <button class="headerButtons" id="spreadSheetButton" onclick="appearFunction(id); receiveData();" title="teamsPage">Team Spreadsheet</button>
-        <button class="headerButtons" id="comparativeGraphs" title="comparePage">Comparative Graphs</button>
-        <button class="headerButtons" id="teamSearch" onclick="appearFunction(id);" title="searchPage">Team Search</button>
-        <button class="headerButtons" id="legendButton" onclick="appearFunction(id)" title="legendPage">Data Legend</button> 
+    <!--<button class="headerButtons" id="spreadSheetButton" onclick="appearFunction(id); receiveData();" title="teamsPage">Team Spreadsheet</button>
+        <!--This page creates the teamspage with the add team button-->
+    <!--<button class="headerButtons" id="comparativeGraphs" title="comparePage">Comparative Graphs</button>
+        <!--This button creates the comparative graphs page -->
+    <!--<button class="headerButtons" id="teamSearch" onclick="appearFunction(id);" title="searchPage">Team Search</button>
+        <!--This button creates the search page for more detailed information on each team
+        <button class="headerButtons" id="legendButton" onclick="appearFunction(id)" title="legendPage">Data Legend</button>
+        This button is for the legend page but it is useless so ignore it ^
 
     </div>
     <div id="legendPage">
@@ -190,60 +395,56 @@
                 </tr>
 
             </table>
-            <form class="fieldsetI" id="addTeamFormImage" action="/submiimage" method="POST" enctype="multipart/form-data">
-                <br />
-                <label for="teamImage">Photo of the Robot</label>
-                <br />
-                <input id="teamImage" type="file" />
 
-                <input type="submit" value="Send Image" />
-
-            </form>
-            <form class="fieldsetI" id="addTeamForm" action="/submit" method="POST" >
+            <form class="fieldsetI" id="addTeamForm" action="/submit" method="POST" enctype="multipart/form-data">
                 <br />
-                    <p class="print">Note: Do NOT use these characters , & = " : or risk destroying my code</p>
+                <p class="print">Note: Do NOT use these characters , & = " : or risk destroying my code</p>
 
-                    <label for="teamName">Team Name:</label>
-                    <input class="addTeamInputs" type="text" id="teamName" name="teamName" placeholder="Name" />
-                    <hr />
-                    <label for="teamNumber">Team Number:</label>
-                    <input class="addTeamInputs" type="number" id="teamNumber" name="teamNumber" placeholder="Number" />
-                    <hr />
-                    <label for="year">Year:</label>
-                    <input class="addTeamInputs" type="number" id="year" name="year" placeholder="Year" />
-                    <hr />
-                    <label for="data1">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data1" name="data1" />
-                    <hr />
-                    <label for="data2">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data2" name="data2" />
-                    <hr />
-                    <label for="data3">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data3" name="data3" />
-                    <hr />
-                    <label for="data4">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data4" name="data4" />
-                    <hr />
-                    <label for="data5">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data5" name="data5" />
-                    <hr />
-                    <label for="data6">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data6" name="data6" />
-                    <hr />
-                    <label for="data7">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data7" name="data7" />
-                    <hr />
-                    <label for="data8">Data:</label>
-                    <input class="addTeamInputs" type="text" id="data8" name="data8" />
-                    <hr />
-                    
-                    <input type="submit" value="Send" />
+                <label for="teamImage">Photo of the Robot:</label>
+                <br />
+                <input id="teamImage" name="teamImage" type="file" />
+                <label for="teamName">Team Name:</label>
+                <hr />
+                <input class="addTeamInputs" type="text" id="teamName" name="teamName" placeholder="Name" />
+                <hr />
+                <label for="teamNumber">Team Number:</label>
+                <input class="addTeamInputs" type="number" id="teamNumber" name="teamNumber" placeholder="Number" />
+                <hr />
+                <label for="year">Year:</label>
+                <input class="addTeamInputs" type="number" id="year" name="year" placeholder="Year" />
+                <hr />
+                <label for="data1">Data:</label>
+                <input class="addTeamInputs" type="text" id="data1" name="data1" />
+                <hr />
+                <label for="data2">Data:</label>
+                <input class="addTeamInputs" type="text" id="data2" name="data2" />
+                <hr />
+                <label for="data3">Data:</label>
+                <input class="addTeamInputs" type="text" id="data3" name="data3" />
+                <hr />
+                <label for="data4">Data:</label>
+                <input class="addTeamInputs" type="text" id="data4" name="data4" />
+                <hr />
+                <label for="data5">Data:</label>
+                <input class="addTeamInputs" type="text" id="data5" name="data5" />
+                <hr />
+                <label for="data6">Data:</label>
+                <input class="addTeamInputs" type="text" id="data6" name="data6" />
+                <hr />
+                <label for="data7">Data:</label>
+                <input class="addTeamInputs" type="text" id="data7" name="data7" />
+                <hr />
+                <label for="data8">Data:</label>
+                <input class="addTeamInputs" type="text" id="data8" name="data8" />
+                <hr />
+
+                <input type="submit" value="Send" />
             </form>
 
-            
+
         </div>
     </div>
-    
+     -->
 </body>
 
 </html>

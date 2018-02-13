@@ -1,0 +1,1 @@
+{"2019":{"teamName":"Team Name","teamNumber":"Team Number","year":"2019","scouter":"Scouter Name","teamCooperation":"Team Cooperation","data1":"kj","data2":"kj","data3":"k","data4":"jk","data5":"jk","data6":"jk","data7":"j","opinion":"Scouter's Opinion","compatability":"Compatability","robotGrade":"Robot Overall Grade","comments":"Comments","image":"Image"}}
