@@ -1,1 +1,1 @@
-{"san diego regionals":{"competitionName":"san diego regionals","year":"2019"}}
+{"asd0.03536550921223442":{"competitionName":"asd","year":"2019"},"san diego regionals0.8071313213856776":{"competitionName":"san diego regionals","year":"2018"}}

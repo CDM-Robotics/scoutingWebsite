@@ -8,6 +8,9 @@
 #addTeamButton:hover{
     background:blue!important;
 }
+#addCompetition:hover{
+    background:blue!important;
+}
 .yearButtons:hover{
     background:blue!important;
 }
@@ -36,15 +39,17 @@ h1 {
     width: 90px;
     color: white;
 }
-
+.competitionButtons:hover{
+    background:blue!important;
+    color:white!important;
+}
 /*This are the styles for the overall formating of the pages*/
-
-    .subPageTitle {
-        float: left;
-        margin: .5%;
-        font-size: 50px;
-        color: white;
-    }
+.subPageTitle {
+    float: left;
+    margin: .5%;
+    font-size: 50px;
+    color: white;
+}
 
 /*These are all the styles for the teamspage*/
 
@@ -66,11 +71,19 @@ h1 {
         #addTeamButton {
             margin: 1.76%;
     
-            float: left;
             height: 40%;
             font-size: 30px;
             background-color: transparent;
             border:0px;
+            color: white;
+        }
+        #addCompetition {
+            margin: 1.76%;
+            float: left;
+            height: 40%;
+            font-size:25px;
+            background-color: transparent;
+            border: 0px;
             color: white;
         }
         #teamSpreadSheet {
@@ -122,7 +135,7 @@ h1 {
             margin: 1.76%;
             font-size: 20px;
             color: white;
-            width: 75%;
+            width: 50%;
             background-color: lightblue;
             height:40%;
             border:1px solid white;

@@ -24,23 +24,22 @@ function pageAppear(id) {
     //this is the button that was pressed
     var pageName = button.name;
     var page = document.getElementById(pageName);
-    var display = page.attributes.name.nodeValue;
+
     //this gets subpage Div that it wants to turn on or off
 
-    if (display == "off"){
-        page.style.display = "inline-block";
-        page.attributes.name.nodeValue = 'on';
-    } else if (display == "on") {
-        page.style.display = "none";
-        page.attributes.name.nodeValue = 'off';
-    }
-
+    page.style.display = 'inline-block';
+   
 }
 
 //this function is called before the pageAppear function to erase all of the previous displays on the page to make way for the next one
 function erasePage() {
 
     var presentDivs = document.getElementsByClassName('subPage');
+    var addTeamButton = document.getElementById('addTeamButton');
+    var addCompetitionButton = document.getElementById('addCompetition');
+
+    addTeamButton.style.display = 'none';
+    addCompetitionButton.style.display = 'none';
 
     var i = presentDivs.length;
 
@@ -54,32 +53,7 @@ function erasePage() {
 
 }
 
-function receiveData(id) {
 
-    var xhttp = new XMLHttpRequest();
-    var button = document.getElementById(id);
-    var name = button.name;
-
-    xhttp.onreadystatechange = function () {
-
-        if (this.readyState == 4 && this.status == 200) {
-
-            var Json = this.responseText;
-
-            if (id == 'yearSearchTable') {
-                processData(Json, id);
-            } else if (name == 'spreadSheet') {
-                receiveYears(id, Json);
-            }
-            
-            
-
-        }
-    }
-    xhttp.open("GET", "data.txt", true);
-    xhttp.send();
-
-}
 function receiveYears(id, Json) {
 
     var xhttp = new XMLHttpRequest();
@@ -94,12 +68,9 @@ function receiveYears(id, Json) {
 
             if (id == 'yearSearchTable') {
                 processData(yearsJson, id);
-                return 0;
             } else if (name == 'spreadSheet') {
-                displayData(Json, id, 'year', yearsJson);
-
+                displayData(Json, yearsJson);
             }
-
 
 
         }
@@ -108,74 +79,7 @@ function receiveYears(id, Json) {
     xhttp.send();
 
 }
-/******************************************************************
- *                          displayData()
-This function here is the function that i want to use for the entire
-spreadsheet operation
 
-I want this function to take the table in the main box and display all the data
-in table format but still be able to apply the filters sent in by the user
-
- * 
- ******************************************************************/
-function displayData(data, id, name, yearsJsonStr) {
-
-    //data = the teamsjson
-    //the id is the year
-    //name is the string year
-    var teamJson = JSON.parse(data);
-    var table = document.getElementById('spreadSheetTable');
-    var j = 0;
-    var yearsJson = JSON.parse(yearsJsonStr);
-    //this is the Json with the years on it
-    table.innerHTML = '';
-
-    /*okay so first i need to display the yearsJson data values to the first row of the table
-        i'll do that by going through the yearsJson to see if the year matches the id
-
-        ill run a for loop on the keys in yearsJson
-            then inside that loop i'll run an iff then statement asking if the key has the index of the id or year
-                then i'll create a new row in position 0 of the table
-                then i'll create another for loop going through the keys of the yearsJson
-                    everytime i'll create a cell
-                    and add the yearsJson stuff to the inner html of the cell
-                    
-         then i'll break out of the loop
-    */
-
-
-    var newRow = table.insertRow(0);
-    var i = 0;
-    for (var innerKey in yearsJson[id]) {
-        var newCell = newRow.insertCell(i);
-        newCell.innerHTML = yearsJson[id][innerKey];
-        i++;
-    }
-            
-    for (var key in teamJson) {
-
-        //if the teamJson in question's year number is the same year as id's year
-        if (teamJson[key][name].indexOf(id) != -1) {
-
-
-            var Row1 = table.insertRow(1);
-            var i = 0;
-            for (var innerKey in teamJson[key]) {
-                var newCell = Row1.insertCell(i);
-                newCell.innerHTML = teamJson[key][innerKey];
-                i++;
-            }
-
-
-        }
-    }
-}
-
-
-function displayCompetitions() {
-    var table = document.getElementById('spreadSheetTable');
-
-}
 /*****************************************************************
  *                        processData()
 
@@ -198,16 +102,231 @@ function processData(data, id) {
         if (executedYears.indexOf(key) == -1) {
 
             var newRow = table.insertRow(0);
-            newRow.innerHTML = "<button class='yearButtons' id='" + key + "' name='spreadSheet' style=' font-size:20px; color: white; width:100%; height:5%; background-color:darkblue; border: 0px;' onclick='erasePage();pageAppear(id);displayCompetitions(id);'>FRC Game " + key + "</button>";
+            newRow.innerHTML = "<button class='yearButtons' id='" + key + "' name='spreadSheet' style=' font-size:20px; color: white; width:100%; height:5%; background-color:darkblue; border: 0px;' onclick='erasePage();pageAppear(id);competitionButtonAppear();saveYearToDiv(id);receiveCompetitions(" + key + ");'>FRC Game " + key + "</button>";
             executedYears = executedYears + key + ".";
 
-        }   
+        }
     }
- 
+    
+
+}
+
+
+function competitionButtonAppear() {
+    var competitionAddButton = document.getElementById("addCompetition");
+    competitionAddButton.style.display = 'inline-block';
+}
+
+/************************************************************
+ *                     saveYearToDiv (id)
+ *THis function takes the year of the button
+pressed and then paves it to a div that then sets the
+inner htm,l of the div to be that year as to save that data piece
+ ************************************************************/
+function saveYearToDiv(id) {
+
+    var div = document.getElementById("passingYearToCompetitionForm");
+    div.innerHTML = '';
+    div.innerHTML = id;
+}
+
+
+function passCompetitionTOForm() {
+
+    var passingYearToCompetitionForm = document.getElementById('passingYearToCompetitionForm');
+    var formYearBox = document.getElementById('year');
+    formYearBox.value = passingYearToCompetitionForm.innerHTML;
+
+}
+
+
+function receiveCompetitions(id) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+            var competitionJson = this.responseText;
+            displayCompetitions(id, competitionJson);
+
+        }
+    }
+    xhttp.open("GET", "competition.txt", true);
+    xhttp.send();
+}
+
+
+function displayCompetitions(year, Json) {
+    var table = document.getElementById('spreadSheetTable');
+    table.innerHTML = '';
+    if (Json != '') {
+        var competitionJson = JSON.parse(Json);
+        var statedCompetitions = '.'
+
+        for (var key in competitionJson) {
+
+            if (competitionJson[key]["year"].indexOf(year) != -1 && statedCompetitions.indexOf(competitionJson[key]['competitionName']) == -1) {
+                var newRow = table.insertRow(0);
+                var newCell = newRow.insertCell(0);
+                newCell.innerHTML = '<button name="spreadSheet" class="competitionButtons" id="' + competitionJson[key]['competitionName'] + 'year' + year + '" onclick="erasePage();pageAppear(id);addTeamButtonAppear();saveCompetitionToDiv(id);receiveData(id);" style="width:100%;height:5%;font-size:20px;border:0px;background:transparent;">' + competitionJson[key]['competitionName'] + '</button>';
+                newCell.style.width = '100%';
+                statedCompetitions = statedCompetitions + competitionJson[key]['competitionName'] + '.';
+            }
+
+        }
+
+    } else {
+        table.innerHTML = 'Sorry, No competitions yet added.  Click the "Add Competition" button to get add one.';
+    }
+    
+}
+
+
+function saveCompetitionToDiv(id) {
+    var passingCompetitionToTeamForm = document.getElementById('passingCompetitionToTeamForm');
+    var button = document.getElementById(id);
+
+    var competition = button.innerHTML
+    passingCompetitionToTeamForm.innerHTML = '';
+    passingCompetitionToTeamForm.innerHTML = competition;
+}
+
+
+function addTeamButtonAppear() {
+    var addTeamButton = document.getElementById('addTeamButton');
+    addTeamButton.style.display = 'inline-block';
+}
+
+
+function receiveData(id) {
+
+    var xhttp = new XMLHttpRequest();
+    var button = document.getElementById(id);
+    var name = button.name;
+
+    xhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            var Json = this.responseText;
+
+            receiveYears(id, Json);
+        }
+    }
+    xhttp.open("GET", "data.txt", true);
+    xhttp.send();
+
+}
+
+/******************************************************************
+ *                          displayData()
+This function here is the function that i want to use for the entire
+spreadsheet operation
+
+I want this function to take the table in the main box and display all the data
+in table format but still be able to apply the filters sent in by the user
+
+ * 
+ ******************************************************************/
+function displayData(data, yearsJsonStr) {
+
+    var table = document.getElementById('spreadSheetTable');
+    table.innerHTML = '';
+
+
+    if (teamsJson != '') {
+        var yearsJson = JSON.parse(yearsJsonStr);
+        var teamsJson = JSON.parse(data);
+        var yearDiv = document.getElementById('passingYearToCompetitionForm')
+        var year = yearDiv.innerHTML;
+
+        var competitionDiv = document.getElementById('passingCompetitionToTeamForm');
+        var competition = competitionDiv.innerHTML;
+
+        for (var key in yearsJson) {
+            if (key.indexOf(year) != -1) {
+                var firstRow = table.insertRow(0)
+                var i = 0;
+                for (var innerKey in yearsJson[key]) {
+                    var firstCells = firstRow.insertCell(i);
+                    firstCells.innerHTML = yearsJson[key][innerKey];
+                    firstCells.style.width = '200px';
+                    i++;
+                }
+            }
+        }
+
+        for (var key in teamsJson) {
+            if (teamsJson[key]['competition'].indexOf(competition) != -1 && teamsJson[key]['year'].indexOf(year) != -1) {
+
+                var newRow = table.insertRow(1);
+                var i = 0;
+
+                for (var innerKey in teamsJson[key]) {
+                    
+                    var newCell = newRow.insertCell(i);
+                    newCell.innerHTML = teamsJson[key][innerKey];
+                    newCell.style.width = '100px';
+                    i++;
+                }
+
+            }
+        }
+    }
+    if (table.innerHTML == '') {
+        table.innerHTML = "Sorry there are no Teams inputted at the moment. Please use the Add Team button to begin recording.";
+    }
+    
+    addTeamChange(yearsJson, year);
+}
+
+function addTeamChange(yearsJson, year) {
+
+    var form = document.getElementById('addTeamForm');
+    for (var key in yearsJson) {
+        if (key == year) {
+            form.innerHTML = '<p>General Data</p>';
+            form.innerHTML = form.innerHTML + '<br><label for="teamImage">Photo of the Robot:</label><input id= "teamImage" name= "teamImage" type= "file" /><hr />';
+            var i = 0;
+            for (var innerKey in yearsJson[key]) {
+                if (innerKey != 'image') {
+                    
+                    form.innerHTML = form.innerHTML + "<label for='" + innerKey + "'>" + yearsJson[key][innerKey] + "</label><input class='addTeamInputs' type='text' id='" + innerKey + "' name='" + innerKey + "' placeholder='" + yearsJson[key][innerKey] + "' /><hr />";
+                    if (i == 5) {
+                        form.innerHTML = form.innerHTML + '<p>Autonomous Data</p>';
+                    } else if (i == 9) {
+                        form.innerHTML = form.innerHTML + '<p>Teleop Data</p>';
+                    } else if (i == 13) {
+                        form.innerHTML = form.innerHTML + '<p>End Game Data</p>';
+                    } else if (i == 14) {
+                        form.innerHTML = form.innerHTML + '<p>Robot Specifics</p>';
+                    } else if (i == 17){
+                        form.innerHTML = form.innerHTML + '<p>Overall Performance</p>';
+
+                    }
+                    i++;
+                }
+                
+            }
+            form.innerHTML = form.innerHTML + '<input type= "submit" value= "Send" /><br /><br />';
+        }
     }
 
+}
 
+function passCompetitionandYearToForm() {
+    var competitionDiv = document.getElementById('passingCompetitionToTeamForm');
+    var yearDiv = document.getElementById('passingYearToCompetitionForm');
 
+    var competition = competitionDiv.innerHTML;
+    var year = yearDiv.innerHTML;
+
+    var yearForm = document.getElementById('tyear');
+    var competitionForm = document.getElementById('competition');
+
+    yearForm.value = year;
+    competitionForm.value = competition;
+}
 //These functions down here are from my old program and should only be used for reference
 
 

@@ -28,9 +28,9 @@
 
 </head>
 
-<body onload="receiveYears('yearSearchTable')">
+<body onload="receiveYears('yearSearchTable')" style="height:100%;width:100%;">
     <!--THis stuff is all part of the style of the page and shouldn't be messed with kid-->
-    <div style=" position: relative;background-color:darkblue; width:10%; height: 100%; float:left; margin:0px;">
+    <div style=" position: relative;background-color:darkblue; width:15%; height: 100%; float:left; margin:0px;">
         <!--This is the div for the TT logo image-->
         <div style="width:100%; height:10%; margin:0px;"></div>
         <div id="yearSpecifics">
@@ -47,19 +47,21 @@
         </div>
     </div>
 
-    <div style=" background-color:lightblue; float:right; width:90%; height:10%; ">
+    <div style=" background-color:lightblue; float:right; width:85%; height:10%; ">
         <form id="searchBar">
 
-            <input placeholder="Search For Teams" id="userSearch" name="userSearch" type="text" onkeyup="receiveData2(this.value)" />
+            <input placeholder="Search For Teams" id="userSearch" name="userSearch" type="text"  />
 
         </form>
-        <button style=" background-color:lightblue;"id="addTeamButton" onclick="erasePage(); pageAppear(id); " name="addTeam">Add Team</button>
+        <button style=" float:right; background-color:lightblue; display:none;" id="addTeamButton" onclick="erasePage(); pageAppear(id); passCompetitionandYearToForm();" name="addTeam">Add Team</button>
+        <button id="addCompetition" name="addCompetitionPage" onclick="erasePage(); pageAppear(id); passCompetitionTOForm();" style="float:right;background-color:lightblue; display:none;">Add Competition</button>
+
     </div>
     <!--THis stuff is all part of the style of the page and shouldn't be messed with kid ^^^-->
+    
 
 
-
-    <div style=" width:90%; height:90%; float:right;">
+    <div style=" width:85%; height:90%; float:right; overflow:scroll;">
         <!-- This is the form that is activated when you press the add team button ----------------------------------------------------->
         <div class="subPage" id="addYearPage" name="off" style="display:none;width:100%; height:100%; float:right;">
 
@@ -68,6 +70,7 @@
                 <label>Year:</label>
                 <input class="addTeamInputs" type="number" placeholder="Year" name="year" />
                 <hr />
+                <p>Autonomous Data</p>
                 <label>Data Type 1:</label>
                 <input class="addTeamInputs" type="text" placeholder="Data Type 1" name="data1" />
                 <hr />
@@ -80,6 +83,8 @@
                 <label>Data Type 4:</label>
                 <input class="addTeamInputs" type="text" placeholder="Data Type 4" name="data4" />
                 <hr />
+                <p>Teleop Data</p>
+
                 <label>Data Type 5:</label>
                 <input class="addTeamInputs" type="text" placeholder="Data Type 5" name="data5" />
                 <hr />
@@ -89,7 +94,23 @@
                 <label>Data Type 7:</label>
                 <input class="addTeamInputs" type="text" placeholder="Data Type 7" name="data7" />
                 <hr />
-
+                <label>Data Type 8:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 8" name="data8">
+                <hr />
+                <p>End Game Data</p>
+                <label>Data Type 9:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 9" name="data9">
+                <hr />
+                <p>Robot Specific Data</p>
+                <label>Data Type 10:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 10" name="data10">
+                <hr />
+                <label>Data Type 11:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 11" name="data11">
+                <hr />
+                <label>Data Type 12:</label>
+                <input class="addTeamInputs" type="text" placeholder="Data Type 12" name="data12">
+                <hr />
                 <input type="submit" value="Submit" />
 
             </form>
@@ -99,68 +120,7 @@
 
 
             <form class="fieldsetI" id="addTeamForm" action="/submit" method="POST" enctype="multipart/form-data">
-                <br />
-
-                <label for="teamImage">Photo of the Robot:</label>
-
-                <input id="teamImage" name="teamImage" type="file" />
-                <hr />
-                <label for="teamName">Team Name:</label>
-
-                <input class="addTeamInputs" type="text" id="teamName" name="teamName" placeholder="Name" />
-                <hr />
-                <label for="teamNumber">Team Number:</label>
-                <input class="addTeamInputs" type="text" id="teamNumber" name="teamNumber" placeholder="Number" />
-                <hr />
-                <label for="year">Year:</label>
-                <input class="addTeamInputs" type="number" id="year" name="year" placeholder="Year" />
-                <hr />
-                <label for="competition">Competition:</label>
-                <input class="addTeamInputs" type="text" id="competition" name="competition" placeholder="Please do not misspell!!!" />
-                <hr />
-                <label for="data1">Scouter Name:</label>
-                <input class="addTeamInputs" type="text" id="data1" name="data1" />
-                <hr />
-                <label for="data2">Team Cooperation:</label>
-                <input class="addTeamInputs" type="text" id="data2" name="data2" value="A - F" />
-                <hr />
-                <label for="data3">Drive - Detailed Description:</label>
-                <input class="addTeamInputs" type="text" id="data3" name="data3" value="Wheel type, Drive train specifics, etc" />
-                <hr />
-                <label for="data4">Climbing Mechanism - Detailed Description:</label>
-                <input class="addTeamInputs" type="text" id="data4" name="data4" />
-                <hr />
-                <label for="data5">Cube inputs:</label>
-                <input class="addTeamInputs" type="text" id="data5" name="data5" value="How well the robot handles cubes on the ground" />
-                <hr />
-                <label for="data6">Cube outputs:</label>
-                <input class="addTeamInputs" type="text" id="data6" name="data6" value="How well the robot places cubes in the scale or switches" />
-                <hr />
-                <label for="data7">Number of Switch cubes placed:</label>
-                <input class="addTeamInputs" type="text" id="data7" name="data7" />
-                <hr />
-                <label for="data8">Number of Scale cubes placed:</label>
-                <input class="addTeamInputs" type="text" id="data8" name="data8" />
-                <hr />
-                <label for="data9">Number of cubes Exchanged:</label>
-                <input class="addTeamInputs" type="text" id="data9" name="data9" />
-                <hr />
-                <label for="data10">Scouter's opinion on the quality of the robot:</label>
-                <input class="addTeamInputs" type="text" id="data10" name="data10" />
-                <hr />
-
-                <label for="data11">Compatability with our robot:</label>
-                <input class="addTeamInputs" type="text" id="data11" name="data11" />
-                <hr />
-                <label for="data12">Robot overall grade:</label>
-                <input class="addTeamInputs" type="text" id="data12" name="data12" value="A-F" />
-                <hr />
-                <label for="data13">Comments:</label>
-                <input class="addTeamInputs" type="text" id="data13" name="data13" />
-                <hr />
-                <input type="submit" value="Send" />
-                <br />
-                <br />
+                
             </form>
 
         </div>
@@ -185,11 +145,12 @@
         <div id="spreadSheet" class="subPage" name="off" style=" display:none;">
             <center>
                 <table border="1" id="spreadSheetTable" style=" color:black; font-size:15px;"></table>
-                <button id="addCompetition" name="addCompetitionPage" onclick="erasePage(); pageAppear(id);" style="border:1px solid black; width:25%;height:5%;background-color:transparent;">Add Competition</button>
-            </center>
+                </center>
         </div>
 
         <div id="addCompetitionPage" class="subPage" name="off" style=" display:none;">
+            <div style=" display:none;" id="passingYearToCompetitionForm"></div>
+            <div style=" display:none;" id="passingCompetitionToTeamForm"></div>
             <form class="fieldsetI" id="addTeamForm" action="/newCompetition" method="POST" enctype="multipart/form-data">
 
                 <label for="competitionName">Competition Name:</label>

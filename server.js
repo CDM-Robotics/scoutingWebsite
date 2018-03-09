@@ -18,9 +18,27 @@ var competitionJson = {};
 
 //Long Term Issues
 //  Favicon.ico
+fs.readFile('./data.txt', function (err, data) {
+    console.log("data is " + data);
+    teamsJson = JSON.parse(data);
+    console.log("COol");
+
+});
+fs.readFile('./years.txt', function (err, data) {
+    console.log("years is " + data);
+    yearsJson = JSON.parse(data);
+    console.log("COol");
+
+});
+fs.readFile('./competition.txt', function (err, data) {
+    console.log("competitions is " + data);
+    competitionJson = JSON.parse(data);
+    console.log("COol");
+
+});
 
 var server = http.createServer(function (request, response) {
-
+       
     fs.readFile('./' + request.url, function (err, data) {
 
         var urlStr = String(request.url);
@@ -59,7 +77,13 @@ var server = http.createServer(function (request, response) {
                     console.log('DATA SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENT!!!!');
                 });
             }
-
+            else if (urlStr == '/competition.txt') {
+                fs.readFile('./competition.txt', function (err, data) {
+                    response.setHeader('Content-type', 'text/plain');
+                    response.end(data);
+                    console.log('DATA SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENT!!!!');
+                });
+            }
 
         } else if (urlStr == '/') {
             fs.readFile('./scoutingWebsite.html', function (err, data) {
@@ -178,7 +202,9 @@ var server = http.createServer(function (request, response) {
                         yearsJson[name] = {};
                         yearsJson[name]['teamName'] = "Team Name";
                         yearsJson[name]['teamNumber'] = "Team Number";
-                        yearsJson[name][field] = value;
+                        yearsJson[name]['year'] = "Year";
+                        yearsJson[name]['competition'] = "Competition";
+
                         yearsJson[name]['scouter'] = "Scouter Name";
                         yearsJson[name]['teamCooperation'] = "Team Cooperation";
 
@@ -187,10 +213,10 @@ var server = http.createServer(function (request, response) {
                     } else {
                         yearsJson[name][field] = value;
                     }
-                    if (j == 7) {
+                    if (j == 12) {
                         console.log(name);
                         yearsJson[name]['opinion'] = "Scouter's Opinion";
-                        yearsJson[name]['compatability'] = "Compatability";
+                        yearsJson[name]['reliability'] = "Reliability";
                         yearsJson[name]['robotGrade'] = "Robot Overall Grade";
                         yearsJson[name]['comments'] = "Comments";
                         yearsJson[name]['image'] = "Image";
@@ -233,7 +259,7 @@ var server = http.createServer(function (request, response) {
                     //field
                     //value 
                     if (field == 'competitionName') {
-                        name = value;
+                        name = value + (Math.random() * Math.random());
                         competitionJson[name] = {};
                         competitionJson[name][field] = value;
                     } else {
